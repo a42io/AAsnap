@@ -1,21 +1,9 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
 import { MetamaskActions, MetaMaskContext } from '../hooks';
-import {
-  connectSnap,
-  getSnap,
-  connectAA,
-  getAAcountBalance,
-  transferFromAAccount,
-} from '../utils';
-import {
-  ConnectButton,
-  InstallFlaskButton,
-  ConnectAAButton,
-  LoadBalanceButton,
-  TransferButton,
-  Card,
-} from '../components';
+import { connectSnap, getSnap } from '../utils';
+import { ConnectButton, InstallFlaskButton, Card } from '../components';
+import { AAExample } from '../components/AAExample';
 
 const Container = styled.div`
   display: flex;
@@ -74,10 +62,6 @@ const ErrorMessage = styled.div`
 
 const Index = () => {
   const [state, dispatch] = useContext(MetaMaskContext);
-  const [address, setAddress] = useState('');
-  const [balance, setBalance] = useState('');
-  const [target, setTarget] = useState('');
-  const [ethAmount, setEthAmount] = useState('');
 
   const handleConnectClick = async () => {
     try {
@@ -88,47 +72,6 @@ const Index = () => {
         type: MetamaskActions.SetInstalled,
         payload: installedSnap,
       });
-    } catch (e) {
-      console.error(e);
-      dispatch({ type: MetamaskActions.SetError, payload: e });
-    }
-  };
-
-  const handleConnectAAClick = async () => {
-    try {
-      setAddress(await connectAA());
-      console.log(address);
-    } catch (e) {
-      console.error(e);
-      dispatch({ type: MetamaskActions.SetError, payload: e });
-    }
-  };
-
-  const handleLoadAAccountBalanceClick = async () => {
-    try {
-      setBalance(await getAAcountBalance());
-      console.log(balance);
-    } catch (e) {
-      console.error(e);
-      dispatch({ type: MetamaskActions.SetError, payload: e });
-    }
-  };
-
-  const handleTargetChange = (event: React.FocusEvent<HTMLInputElement>) => {
-    setTarget(event.currentTarget.value);
-  };
-
-  const handleEthAmountChange = (event: React.FocusEvent<HTMLInputElement>) => {
-    setEthAmount(event.currentTarget.value);
-  };
-
-  const handleTransferFromAAccountClick = async () => {
-    if (!target || !ethAmount) {
-      return;
-    }
-
-    try {
-      await transferFromAAccount(target, ethAmount);
     } catch (e) {
       console.error(e);
       dispatch({ type: MetamaskActions.SetError, payload: e });
@@ -172,74 +115,7 @@ const Index = () => {
             disabled={!state.isFlask}
           />
         )}
-        <Card
-          content={{
-            title: 'Connect',
-            description: 'Connect your Abstract Account!',
-            button: <ConnectAAButton onClick={handleConnectAAClick} />,
-          }}
-          disabled={!state.installedSnap && !state.installedSnap}
-          fullWidth
-        />
-        {Boolean(address) && (
-          <Card
-            content={{
-              title: 'Your Abstract Account 🎉',
-              description: `${address}`,
-              button: null,
-            }}
-            disabled={!state.installedSnap && !state.installedSnap}
-            fullWidth
-          />
-        )}
-        {Boolean(address) && (
-          <Card
-            content={{
-              title: 'Load Balance',
-              description: 'Get your Abstract Account balance!',
-              button: (
-                <LoadBalanceButton onClick={handleLoadAAccountBalanceClick} />
-              ),
-            }}
-            disabled={!state.installedSnap && !state.installedSnap}
-            fullWidth
-          />
-        )}
-        {Boolean(address) && (
-          <Card
-            content={{
-              title: 'Your Abstract Account Balance',
-              description: `${balance}`,
-              button: null,
-            }}
-            disabled={!state.installedSnap && !state.installedSnap}
-            fullWidth
-          />
-        )}
-        {Boolean(address) && (
-          <div>
-            <p>
-              target: <input type="text" onChange={handleTargetChange} />
-            </p>
-            <p>
-              amount: <input type="number" onChange={handleEthAmountChange} />{' '}
-              ETH
-            </p>
-          </div>
-        )}
-        {Boolean(address) && (
-          <Card
-            content={{
-              title: 'Transfer',
-              description: 'Transfer value from your Abstract Account!',
-              button: (
-                <TransferButton onClick={handleTransferFromAAccountClick} />
-              ),
-            }}
-            disabled={!state.installedSnap && !state.installedSnap}
-            fullWidth
-          />
-        )}
+        <AAExample />
       </CardContainer>
     </Container>
   );
