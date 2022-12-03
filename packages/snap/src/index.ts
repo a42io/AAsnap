@@ -27,7 +27,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
       return await getEoaAddress();
     case 'balance_eoa':
       return await getBalance(await getEoaAddress());
-    case 'connect_aa':
+    case 'connect':
       return await getAddress();
     case 'balance':
       return await getBalance(await getAddress());

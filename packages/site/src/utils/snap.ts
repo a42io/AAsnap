@@ -88,7 +88,7 @@ export const connectAA = async (): Promise<string> => {
     params: [
       defaultSnapOrigin,
       {
-        method: 'connect_aa',
+        method: 'connect',
       },
     ],
   })) as string;
