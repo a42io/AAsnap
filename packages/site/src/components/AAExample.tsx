@@ -1,7 +1,13 @@
 import { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { MetamaskActions, MetaMaskContext } from '../hooks';
-import { connectAA, getAAcountBalance, transferFromAAccount } from '../utils';
+import {
+  connectAA,
+  connectEOA,
+  getAAcountBalance,
+  getEOABalance,
+  transferFromAAccount,
+} from '../utils';
 
 const CardWrapper = styled.div<{ fullWidth?: boolean; disabled: boolean }>`
   display: flex;
@@ -64,6 +70,8 @@ const Button = styled.button`
 
 export const AAExample = () => {
   const [, dispatch] = useContext(MetaMaskContext);
+  const [eoaAddress, setEOAAddress] = useState('');
+  const [eoaBalance, setEOABalance] = useState('');
   const [address, setAddress] = useState('');
   const [balance, setBalance] = useState('');
   const [target, setTarget] = useState('');
@@ -71,6 +79,8 @@ export const AAExample = () => {
 
   const handleConnectAAClick = async () => {
     try {
+      setEOAAddress(await connectEOA());
+      setEOABalance(await getEOABalance());
       setAddress(await connectAA());
       setBalance(await getAAcountBalance());
     } catch (e) {
@@ -122,6 +132,11 @@ export const AAExample = () => {
       )}
       {address && (
         <>
+          <CardWrapper fullWidth={true} disabled={false}>
+            <Title>Your EOA Account </Title>
+            <Text>Address: {eoaAddress}</Text>
+            <Text>Balance: {eoaBalance}</Text>
+          </CardWrapper>
           <CardWrapper fullWidth={true} disabled={false}>
             <Title>Your Abstract Account 🎉</Title>
             <Text>Address: {address}</Text>

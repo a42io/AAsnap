@@ -56,6 +56,32 @@ export const getSnap = async (version?: string): Promise<Snap | undefined> => {
   }
 };
 
+export const connectEOA = async (): Promise<string> => {
+  const address = (await window.ethereum.request({
+    method: 'wallet_invokeSnap',
+    params: [
+      defaultSnapOrigin,
+      {
+        method: 'connect_eoa',
+      },
+    ],
+  })) as string;
+  return address;
+};
+
+export const getEOABalance = async (): Promise<string> => {
+  const balance = (await window.ethereum.request({
+    method: 'wallet_invokeSnap',
+    params: [
+      defaultSnapOrigin,
+      {
+        method: 'balance_eoa',
+      },
+    ],
+  })) as string;
+  return balance;
+};
+
 export const connectAA = async (): Promise<string> => {
   const address = (await window.ethereum.request({
     method: 'wallet_invokeSnap',

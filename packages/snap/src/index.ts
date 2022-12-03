@@ -1,7 +1,14 @@
 import { OnRpcRequestHandler } from '@metamask/snap-types';
+import { ethers } from 'ethers';
 import { getAbstractAccount } from './getAbstractAccount';
 import { getBalance } from './getBalance';
 import { transfer } from './transfer';
+
+export const getEoaAddress = async (): Promise<string> => {
+  const provider = new ethers.providers.Web3Provider(wallet as any);
+  const accounts = await provider.send('eth_requestAccounts', []);
+  return accounts[0];
+};
 
 export const getAddress = async (): Promise<string> => {
   const aa = await getAbstractAccount();
@@ -16,6 +23,10 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
   console.log(origin);
   console.log(request);
   switch (request.method) {
+    case 'connect_eoa':
+      return await getEoaAddress();
+    case 'balance_eoa':
+      return await getBalance(await getEoaAddress());
     case 'connect_aa':
       return await getAddress();
     case 'balance':
