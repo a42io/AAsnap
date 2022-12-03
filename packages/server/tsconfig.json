@@ -1,0 +1,37 @@
+{
+    "compilerOptions": {
+        "outDir": "dist",
+        "pretty": true,
+        "baseUrl": ".",
+        "paths": {
+            "~*": [
+                "./src/*"
+            ]
+        },
+        "lib": [
+            "ES5",
+            "ES6",
+            "ESNext"
+        ],
+        "module": "commonjs",
+        "target": "ES6",
+        "incremental": true,
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "resolveJsonModule": true
+    },
+    "exclude": [
+        "node_modules",
+        "./src/public",
+        "./src/views",
+        "./scripts/*.ts"
+    ]
+}
