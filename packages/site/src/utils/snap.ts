@@ -95,7 +95,7 @@ export const connectAA = async (): Promise<string> => {
   return address;
 };
 
-export const getAAcountBalance = async (): Promise<string> => {
+export const getAABalance = async (): Promise<string> => {
   const balance = (await window.ethereum.request({
     method: 'wallet_invokeSnap',
     params: [
@@ -108,10 +108,7 @@ export const getAAcountBalance = async (): Promise<string> => {
   return balance;
 };
 
-export const transferFromAAccount = async (
-  target: string,
-  ethValue: string,
-) => {
+export const transferFromAA = async (target: string, ethValue: string) => {
   await window.ethereum.request({
     method: 'wallet_invokeSnap',
     params: [

@@ -4,9 +4,9 @@ import { MetamaskActions, MetaMaskContext } from '../hooks';
 import {
   connectAA,
   connectEOA,
-  getAAcountBalance,
+  getAABalance,
   getEOABalance,
-  transferFromAAccount,
+  transferFromAA,
 } from '../utils';
 
 const CardWrapper = styled.div<{ fullWidth?: boolean; disabled: boolean }>`
@@ -82,7 +82,7 @@ export const AAExample = () => {
       setEOAAddress(await connectEOA());
       setEOABalance(await getEOABalance());
       setAddress(await connectAA());
-      setBalance(await getAAcountBalance());
+      setBalance(await getAABalance());
     } catch (e) {
       console.error(e);
       dispatch({ type: MetamaskActions.SetError, payload: e });
@@ -92,7 +92,7 @@ export const AAExample = () => {
   const handleReloadBalancesClick = async () => {
     try {
       setEOABalance(await getEOABalance());
-      setBalance(await getAAcountBalance());
+      setBalance(await getAABalance());
     } catch (e) {
       console.error(e);
       dispatch({ type: MetamaskActions.SetError, payload: e });
@@ -107,13 +107,13 @@ export const AAExample = () => {
     setEthAmount(event.currentTarget.value);
   };
 
-  const handleTransferFromAAccountClick = async () => {
+  const handleTransferFromAAClick = async () => {
     if (!target || !ethAmount) {
       return;
     }
 
     try {
-      await transferFromAAccount(target, ethAmount);
+      await transferFromAA(target, ethAmount);
     } catch (e) {
       console.error(e);
       dispatch({ type: MetamaskActions.SetError, payload: e });
@@ -161,7 +161,7 @@ export const AAExample = () => {
               />
             </div>
             <Spacer />
-            <Button onClick={handleTransferFromAAccountClick}>
+            <Button onClick={handleTransferFromAAClick}>
               Transfer from AA
             </Button>
           </CardWrapper>
