@@ -1,12 +1,19 @@
 import { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { MetamaskActions, MetaMaskContext } from '../hooks';
-import { connectSnap, getSnap, connectAA, getAAcountBalance } from '../utils';
+import {
+  connectSnap,
+  getSnap,
+  connectAA,
+  getAAcountBalance,
+  transferFromAAccount,
+} from '../utils';
 import {
   ConnectButton,
   InstallFlaskButton,
   ConnectAAButton,
   LoadBalanceButton,
+  TransferButton,
   Card,
 } from '../components';
 
@@ -69,6 +76,8 @@ const Index = () => {
   const [state, dispatch] = useContext(MetaMaskContext);
   const [address, setAddress] = useState('');
   const [balance, setBalance] = useState('');
+  const [target, setTarget] = useState('');
+  const [ethAmount, setEthAmount] = useState('');
 
   const handleConnectClick = async () => {
     try {
@@ -99,6 +108,27 @@ const Index = () => {
     try {
       setBalance(await getAAcountBalance());
       console.log(balance);
+    } catch (e) {
+      console.error(e);
+      dispatch({ type: MetamaskActions.SetError, payload: e });
+    }
+  };
+
+  const handleTargetChange = (event: React.FocusEvent<HTMLInputElement>) => {
+    setTarget(event.currentTarget.value);
+  };
+
+  const handleEthAmountChange = (event: React.FocusEvent<HTMLInputElement>) => {
+    setEthAmount(event.currentTarget.value);
+  };
+
+  const handleTransferFromAAccountClick = async () => {
+    if (!target || !ethAmount) {
+      return;
+    }
+
+    try {
+      await transferFromAAccount(target, ethAmount);
     } catch (e) {
       console.error(e);
       dispatch({ type: MetamaskActions.SetError, payload: e });
@@ -181,6 +211,30 @@ const Index = () => {
               title: 'Your Abstract Account Balance',
               description: `${balance}`,
               button: null,
+            }}
+            disabled={!state.installedSnap && !state.installedSnap}
+            fullWidth
+          />
+        )}
+        {Boolean(address) && (
+          <div>
+            <p>
+              target: <input type="text" onChange={handleTargetChange} />
+            </p>
+            <p>
+              amount: <input type="number" onChange={handleEthAmountChange} />{' '}
+              ETH
+            </p>
+          </div>
+        )}
+        {Boolean(address) && (
+          <Card
+            content={{
+              title: 'Transfer',
+              description: 'Transfer value from your Abstract Account!',
+              button: (
+                <TransferButton onClick={handleTransferFromAAccountClick} />
+              ),
             }}
             disabled={!state.installedSnap && !state.installedSnap}
             fullWidth

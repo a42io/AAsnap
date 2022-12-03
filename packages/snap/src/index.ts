@@ -1,9 +1,7 @@
 import { OnRpcRequestHandler } from '@metamask/snap-types';
 import { getAbstractAccount } from './getAbstractAccount';
 import { getBalance } from './getBalance';
-
-export const getMessage = (originString: string): string =>
-  `Hello, ${originString}!`;
+import { transfer } from './transfer';
 
 export const getAddress = async (): Promise<string> => {
   const aa = await getAbstractAccount();
@@ -22,6 +20,12 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
       return await getAddress();
     case 'balance':
       return await getBalance(await getAddress());
+    case 'transfer':
+      // eslint-disable-next-line no-case-declarations
+      const { target, ethValue } = request?.params as unknown as {
+        [key: string]: string;
+      };
+      return await transfer(target, ethValue);
     default:
       throw new Error('Method not found.');
   }
