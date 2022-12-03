@@ -115,7 +115,7 @@ const Index = () => {
             disabled={!state.isFlask}
           />
         )}
-        <AAExample />
+        {state.installedSnap && <AAExample />}
       </CardContainer>
     </Container>
   );

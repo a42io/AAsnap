@@ -94,22 +94,6 @@ export const ReconnectButton = (props: ComponentProps<typeof Button>) => {
   );
 };
 
-export const SendHelloButton = (props: ComponentProps<typeof Button>) => {
-  return <Button {...props}>Send message</Button>;
-};
-
-export const ConnectAAButton = (props: ComponentProps<typeof Button>) => {
-  return <Button {...props}>Connect Abstract Account</Button>;
-};
-
-export const LoadBalanceButton = (props: ComponentProps<typeof Button>) => {
-  return <Button {...props}>Load Abstract Account Balance</Button>;
-};
-
-export const TransferButton = (props: ComponentProps<typeof Button>) => {
-  return <Button {...props}>Transfer</Button>;
-};
-
 export const HeaderButtons = ({
   state,
   onConnectClick,

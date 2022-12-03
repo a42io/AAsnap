@@ -46,7 +46,7 @@ const Text = styled.div`
 `;
 
 const Spacer = styled.div`
-  margin-bottom: 1.2rem;
+  margin-top: 20px;
 `;
 
 const Center = styled.div`
@@ -126,9 +126,13 @@ export const AAExample = () => {
             <Title>Your Abstract Account 🎉</Title>
             <Text>Address: {address}</Text>
             <Text>Balance: {balance}</Text>
+            <Spacer />
+            <Button onClick={handleLoadAAccountBalanceClick}>
+              Reload AA Balance
+            </Button>
           </CardWrapper>
           <CardWrapper fullWidth={true} disabled={false}>
-            <Title>Control Abstract Account</Title>
+            <Title>Transfer from Abstract Account</Title>
             <div>
               <TargetInput
                 type="text"
@@ -141,16 +145,10 @@ export const AAExample = () => {
                 onChange={handleEthAmountChange}
               />
             </div>
-            <Center>
-              <Spacer />
-              <Button onClick={handleTransferFromAAccountClick}>
-                Transfer from AA
-              </Button>
-              <Spacer />
-              <Button onClick={handleLoadAAccountBalanceClick}>
-                Reload AA Balance
-              </Button>
-            </Center>
+            <Spacer />
+            <Button onClick={handleTransferFromAAccountClick}>
+              Transfer from AA
+            </Button>
           </CardWrapper>
         </>
       )}
