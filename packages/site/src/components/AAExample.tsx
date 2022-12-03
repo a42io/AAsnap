@@ -89,8 +89,9 @@ export const AAExample = () => {
     }
   };
 
-  const handleLoadAAccountBalanceClick = async () => {
+  const handleReloadBalancesClick = async () => {
     try {
+      setEOABalance(await getEOABalance());
       setBalance(await getAAcountBalance());
     } catch (e) {
       console.error(e);
@@ -141,10 +142,9 @@ export const AAExample = () => {
             <Title>Your Abstract Account 🎉</Title>
             <Text>Address: {address}</Text>
             <Text>Balance: {balance}</Text>
-            <Spacer />
-            <Button onClick={handleLoadAAccountBalanceClick}>
-              Reload AA Balance
-            </Button>
+          </CardWrapper>
+          <CardWrapper fullWidth={true} disabled={false}>
+            <Button onClick={handleReloadBalancesClick}>Reload Balances</Button>
           </CardWrapper>
           <CardWrapper fullWidth={true} disabled={false}>
             <Title>Transfer from Abstract Account</Title>
