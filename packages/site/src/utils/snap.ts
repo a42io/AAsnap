@@ -72,4 +72,17 @@ export const sendHello = async () => {
   });
 };
 
+export const connectAA = async (): Promise<string> => {
+  const address = (await window.ethereum.request({
+    method: 'wallet_invokeSnap',
+    params: [
+      defaultSnapOrigin,
+      {
+        method: 'connect_aa',
+      },
+    ],
+  })) as string;
+  return address;
+};
+
 export const isLocalSnap = (snapId: string) => snapId.startsWith('local:');

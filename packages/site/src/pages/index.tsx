@@ -1,10 +1,11 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { MetamaskActions, MetaMaskContext } from '../hooks';
 import {
   connectSnap,
   getSnap,
   sendHello,
+  connectAA,
   shouldDisplayReconnectButton,
 } from '../utils';
 import {
@@ -12,6 +13,7 @@ import {
   InstallFlaskButton,
   ReconnectButton,
   SendHelloButton,
+  ConnectAAButton,
   Card,
 } from '../components';
 
@@ -101,6 +103,7 @@ const ErrorMessage = styled.div`
 
 const Index = () => {
   const [state, dispatch] = useContext(MetaMaskContext);
+  const [address, setAddress] = useState('');
 
   const handleConnectClick = async () => {
     try {
@@ -120,6 +123,16 @@ const Index = () => {
   const handleSendHelloClick = async () => {
     try {
       await sendHello();
+    } catch (e) {
+      console.error(e);
+      dispatch({ type: MetamaskActions.SetError, payload: e });
+    }
+  };
+
+  const handleConnectAAClick = async () => {
+    try {
+      setAddress(await connectAA());
+      console.log(address);
     } catch (e) {
       console.error(e);
       dispatch({ type: MetamaskActions.SetError, payload: e });
@@ -167,41 +180,26 @@ const Index = () => {
             disabled={!state.isFlask}
           />
         )}
-        {shouldDisplayReconnectButton(state.installedSnap) && (
-          <Card
-            content={{
-              title: 'Reconnect',
-              description:
-                'While connected to a local running snap this button will always be displayed in order to update the snap if a change is made.',
-              button: (
-                <ReconnectButton
-                  onClick={handleConnectClick}
-                  disabled={!state.installedSnap}
-                />
-              ),
-            }}
-            disabled={!state.installedSnap}
-          />
-        )}
         <Card
           content={{
-            title: 'Send Hello message',
-            description:
-              'Display a custom message within a confirmation screen in MetaMask.',
-            button: (
-              <SendHelloButton
-                onClick={handleSendHelloClick}
-                disabled={!state.installedSnap}
-              />
-            ),
+            title: 'Connect Abstract Account',
+            description: 'Connect your Abstract Account to the Dapp.',
+            button: <ConnectAAButton onClick={handleConnectAAClick} />,
           }}
-          disabled={!state.installedSnap}
-          fullWidth={
-            state.isFlask &&
-            Boolean(state.installedSnap) &&
-            !shouldDisplayReconnectButton(state.installedSnap)
-          }
+          disabled={!state.installedSnap && !state.installedSnap}
+          fullWidth
         />
+        {Boolean(address) && (
+          <Card
+            content={{
+              title: 'Your Abstract Account 🎉',
+              description: `${address}`,
+              button: null,
+            }}
+            disabled={!state.installedSnap && !state.installedSnap}
+            fullWidth
+          />
+        )}
         <Notice>
           <p>
             Please note that the <b>snap.manifest.json</b> and{' '}
