@@ -1,34 +1,27 @@
 import { OnRpcRequestHandler } from '@metamask/snap-types';
 import { getAbstractAccount } from './getAbstractAccount';
+import { getBalance } from './getBalance';
 
 export const getMessage = (originString: string): string =>
   `Hello, ${originString}!`;
+
+export const getAddress = async (): Promise<string> => {
+  const aa = await getAbstractAccount();
+  const address = await aa.getAccountAddress();
+  return address;
+};
 
 export const onRpcRequest: OnRpcRequestHandler = async ({
   origin,
   request,
 }) => {
+  console.log(origin);
+  console.log(request);
   switch (request.method) {
-    case 'hello':
-      return wallet.request({
-        method: 'snap_confirm',
-        params: [
-          {
-            prompt: getMessage(origin),
-            description: 'Your abstract account',
-            textAreaContent: await (
-              await getAbstractAccount()
-            ).getAccountAddress(),
-          },
-        ],
-      });
     case 'connect_aa':
-      // eslint-disable-next-line no-case-declarations
-      const aa = await getAbstractAccount();
-      // eslint-disable-next-line no-case-declarations
-      const address = await aa.getAccountAddress();
-      console.log(address);
-      return address;
+      return await getAddress();
+    case 'balance':
+      return await getBalance(await getAddress());
     default:
       throw new Error('Method not found.');
   }

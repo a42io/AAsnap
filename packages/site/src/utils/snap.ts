@@ -69,4 +69,17 @@ export const connectAA = async (): Promise<string> => {
   return address;
 };
 
+export const getAAcountBalance = async (): Promise<string> => {
+  const balance = (await window.ethereum.request({
+    method: 'wallet_invokeSnap',
+    params: [
+      defaultSnapOrigin,
+      {
+        method: 'balance',
+      },
+    ],
+  })) as string;
+  return balance;
+};
+
 export const isLocalSnap = (snapId: string) => snapId.startsWith('local:');

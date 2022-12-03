@@ -1,11 +1,12 @@
 import { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { MetamaskActions, MetaMaskContext } from '../hooks';
-import { connectSnap, getSnap, connectAA } from '../utils';
+import { connectSnap, getSnap, connectAA, getAAcountBalance } from '../utils';
 import {
   ConnectButton,
   InstallFlaskButton,
   ConnectAAButton,
+  LoadBalanceButton,
   Card,
 } from '../components';
 
@@ -67,6 +68,7 @@ const ErrorMessage = styled.div`
 const Index = () => {
   const [state, dispatch] = useContext(MetaMaskContext);
   const [address, setAddress] = useState('');
+  const [balance, setBalance] = useState('');
 
   const handleConnectClick = async () => {
     try {
@@ -87,6 +89,16 @@ const Index = () => {
     try {
       setAddress(await connectAA());
       console.log(address);
+    } catch (e) {
+      console.error(e);
+      dispatch({ type: MetamaskActions.SetError, payload: e });
+    }
+  };
+
+  const handleLoadAAccountBalanceClick = async () => {
+    try {
+      setBalance(await getAAcountBalance());
+      console.log(balance);
     } catch (e) {
       console.error(e);
       dispatch({ type: MetamaskActions.SetError, payload: e });
@@ -144,6 +156,30 @@ const Index = () => {
             content={{
               title: 'Your Abstract Account 🎉',
               description: `${address}`,
+              button: null,
+            }}
+            disabled={!state.installedSnap && !state.installedSnap}
+            fullWidth
+          />
+        )}
+        {Boolean(address) && (
+          <Card
+            content={{
+              title: 'Load Balance',
+              description: 'Get your Abstract Account balance!',
+              button: (
+                <LoadBalanceButton onClick={handleLoadAAccountBalanceClick} />
+              ),
+            }}
+            disabled={!state.installedSnap && !state.installedSnap}
+            fullWidth
+          />
+        )}
+        {Boolean(address) && (
+          <Card
+            content={{
+              title: 'Your Abstract Account Balance',
+              description: `${balance}`,
               button: null,
             }}
             disabled={!state.installedSnap && !state.installedSnap}

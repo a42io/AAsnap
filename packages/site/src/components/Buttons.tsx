@@ -102,6 +102,10 @@ export const ConnectAAButton = (props: ComponentProps<typeof Button>) => {
   return <Button {...props}>Connect Abstract Account</Button>;
 };
 
+export const LoadBalanceButton = (props: ComponentProps<typeof Button>) => {
+  return <Button {...props}>Load Abstract Account Balance</Button>;
+};
+
 export const HeaderButtons = ({
   state,
   onConnectClick,
