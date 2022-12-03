@@ -5,6 +5,23 @@ import { printOp } from './printOp';
 export const transfer = async (target: string, ethValue: string) => {
   const value = ethers.utils.parseEther(ethValue);
   const aa = await getAbstractAccount();
+  const address = await aa.getAccountAddress();
+
+  const result = await wallet.request({
+    method: 'snap_confirm',
+    params: [
+      {
+        prompt: 'Transfer',
+        description: 'Transfer from your Abstraction Account',
+        textAreaContent: `from: ${address}\ntarget: ${target}\nvalue: ${ethValue}`,
+      },
+    ],
+  });
+
+  if (!result) {
+    return;
+  }
+
   const op = await aa.createSignedUserOp({
     target,
     value,
