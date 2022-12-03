@@ -10,8 +10,8 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   flex: 1;
-  margin-top: 7.6rem;
-  margin-bottom: 7.6rem;
+  margin-top: 2.6rem;
+  margin-top: 2.6rem;
   ${({ theme }) => theme.mediaQueries.small} {
     padding-left: 2.4rem;
     padding-right: 2.4rem;
@@ -101,9 +101,8 @@ const Index = () => {
         {!state.installedSnap && (
           <Card
             content={{
-              title: 'Connect',
-              description:
-                'Get started by connecting to and installing the example snap.',
+              title: 'Install AA Snap',
+              description: 'Get started by installing the AA Snap!',
               button: (
                 <ConnectButton
                   onClick={handleConnectClick}
