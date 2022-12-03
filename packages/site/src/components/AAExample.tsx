@@ -109,11 +109,15 @@ export const AAExample = () => {
 
   const handleTransferFromAAClick = async () => {
     if (!target || !ethAmount) {
+      // eslint-disable-next-line no-alert
+      alert('enter target and amount.');
       return;
     }
 
     try {
       await transferFromAA(target, ethAmount);
+      // eslint-disable-next-line no-alert
+      alert('tx has been sent!');
     } catch (e) {
       console.error(e);
       dispatch({ type: MetamaskActions.SetError, payload: e });
