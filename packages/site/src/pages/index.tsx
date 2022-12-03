@@ -25,16 +25,6 @@ const Container = styled.div`
   }
 `;
 
-const Heading = styled.h1`
-  margin-top: 0;
-  margin-bottom: 2.4rem;
-  text-align: center;
-`;
-
-const Span = styled.span`
-  color: ${(props) => props.theme.colors.primary.default};
-`;
-
 const Subtitle = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.large};
   font-weight: 500;
@@ -54,25 +44,6 @@ const CardContainer = styled.div`
   width: 100%;
   height: 100%;
   margin-top: 1.5rem;
-`;
-
-const Notice = styled.div`
-  background-color: ${({ theme }) => theme.colors.background.alternative};
-  border: 1px solid ${({ theme }) => theme.colors.border.default};
-  color: ${({ theme }) => theme.colors.text.alternative};
-  border-radius: ${({ theme }) => theme.radii.default};
-  padding: 2.4rem;
-  margin-top: 2.4rem;
-  max-width: 60rem;
-  width: 100%;
-
-  & > * {
-    margin: 0;
-  }
-  ${({ theme }) => theme.mediaQueries.small} {
-    margin-top: 1.2rem;
-    padding: 1.6rem;
-  }
 `;
 
 const ErrorMessage = styled.div`
@@ -124,12 +95,7 @@ const Index = () => {
 
   return (
     <Container>
-      <Heading>
-        Welcome to <Span>template-snap</Span>
-      </Heading>
-      <Subtitle>
-        Get started by editing <code>src/index.ts</code>
-      </Subtitle>
+      <Subtitle>Try Account Abstraction Snap!</Subtitle>
       <CardContainer>
         {state.error && (
           <ErrorMessage>
@@ -160,13 +126,14 @@ const Index = () => {
                 />
               ),
             }}
+            fullWidth
             disabled={!state.isFlask}
           />
         )}
         <Card
           content={{
-            title: 'Connect Abstract Account',
-            description: 'Connect your Abstract Account to the Dapp.',
+            title: 'Connect',
+            description: 'Connect your Abstract Account!',
             button: <ConnectAAButton onClick={handleConnectAAClick} />,
           }}
           disabled={!state.installedSnap && !state.installedSnap}
@@ -183,14 +150,6 @@ const Index = () => {
             fullWidth
           />
         )}
-        <Notice>
-          <p>
-            Please note that the <b>snap.manifest.json</b> and{' '}
-            <b>package.json</b> must be located in the server root directory and
-            the bundle must be hosted at the location specified by the location
-            field.
-          </p>
-        </Notice>
       </CardContainer>
     </Container>
   );
