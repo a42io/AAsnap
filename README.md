@@ -10,7 +10,7 @@ yarn install && yarn start
 
 ## Live Demo
 
-http://AAsn.app
+https://AAsn.app
 
 ## Note
 
