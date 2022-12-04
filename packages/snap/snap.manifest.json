@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "Account Abstraction Snap",
   "proposedName": "AA Snap",
   "repository": {
@@ -12,7 +12,7 @@
       "npm": {
         "filePath": "dist/bundle.js",
         "iconPath": "images/icon.svg",
-        "packageName": "aasnap",
+        "packageName": "@a42/aasnap",
         "registry": "https://registry.npmjs.org/"
       }
     }
