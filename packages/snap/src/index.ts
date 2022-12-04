@@ -4,6 +4,13 @@ import { getAbstractAccount } from './getAbstractAccount';
 import { getBalance } from './getBalance';
 import { transfer } from './transfer';
 
+export const changeNetwork = async () => {
+  await wallet.request({
+    method: 'wallet_switchEthereumChain',
+    params: [{ chainId: '0x13881' }],
+  });
+};
+
 export const getEoaAddress = async (): Promise<string> => {
   const provider = new ethers.providers.Web3Provider(wallet as any);
   const accounts = await provider.send('eth_requestAccounts', []);
@@ -22,6 +29,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
 }) => {
   console.log(origin);
   console.log(request);
+  await changeNetwork();
   switch (request.method) {
     case 'connect_eoa':
       return await getEoaAddress();
