@@ -1,5 +1,7 @@
 # AA Snap
 
+![cover](https://user-images.githubusercontent.com/594006/205472682-10938d9d-68d0-41aa-a32a-756cb2cef61f.jpg)
+
 AA Snap is the easiest tool to integrate & use Account Abstraction.
 
 ## Demo & Description
