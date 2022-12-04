@@ -1,4 +1,4 @@
-# Account Abstraction Snap
+# AA Snap
 
 AA Snap is the easiest tool to integrate & use Account Abstraction.
 
