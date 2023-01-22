@@ -1,6 +1,6 @@
 {
   "name": "@a42/aasnap",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "MetaMask Snap for Account Abstraction",
   "repository": {
     "type": "git",
