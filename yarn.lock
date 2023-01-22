@@ -9,8 +9,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@a42/aasnap@workspace:packages/snap"
   dependencies:
-    "@account-abstraction/contracts": ^0.3.0
-    "@account-abstraction/sdk": ^0.3.0
+    "@account-abstraction/contracts": ^0.4.0
+    "@account-abstraction/sdk": ^0.4.0
     "@lavamoat/allow-scripts": ^2.0.3
     "@metamask/auto-changelog": ^2.6.0
     "@metamask/eslint-config": ^10.0.0
@@ -36,10 +36,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@account-abstraction/contracts@npm:0.3.0, @account-abstraction/contracts@npm:^0.3.0":
+"@account-abstraction/contracts@npm:0.3.0":
   version: 0.3.0
   resolution: "@account-abstraction/contracts@npm:0.3.0"
   checksum: 3034cd919bb01bb99c84ccdadaa0b01bd9056c3a13c669c535665a23c4f431db0dc97a8a3287e0e15951267ca0b99a4d4b51326b9a02dcc64aee92ae392f1195
+  languageName: node
+  linkType: hard
+
+"@account-abstraction/contracts@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "@account-abstraction/contracts@npm:0.4.0"
+  checksum: e49bf646075441ddd4d5301d627ad8e867c93c8466fa2c4ee5ab346d56995b8fffeb70fa87400801c9d3d433c77d854e8d8412e5b29d38a77f11e569e1920c87
   languageName: node
   linkType: hard
 
@@ -61,6 +68,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@account-abstraction/sdk@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "@account-abstraction/sdk@npm:0.4.0"
+  dependencies:
+    "@account-abstraction/contracts": ^0.4.0
+    "@account-abstraction/utils": ^0.4.0
+    "@ethersproject/abstract-provider": ^5.7.0
+    "@ethersproject/abstract-signer": ^5.7.0
+    "@ethersproject/networks": ^5.7.0
+    "@ethersproject/properties": ^5.7.0
+    "@ethersproject/providers": ^5.7.0
+    "@types/debug": ^4.1.7
+    debug: ^4.3.4
+    ethers: ^5.7.0
+  checksum: b05895c0593fb4129083c96d3d7224fda48f1c44242c58abf2f319381c79e2bd6a0c953ea632d1b764df300e00a9135d9cda746df0f9e672668323210d6c6fcf
+  languageName: node
+  linkType: hard
+
 "@account-abstraction/utils@npm:^0.3.0":
   version: 0.3.0
   resolution: "@account-abstraction/utils@npm:0.3.0"
@@ -71,6 +96,19 @@ __metadata:
     "@openzeppelin/contracts": ^4.7.3
     ethers: ^5.7.0
   checksum: e6c0b85b46a19d7689e7887562cf0538fd01340f7538f3c4d3d76fbf770a9a5b2585b0c5f88c9f55e8472b3e71dab4e1e654b066fa72693c32ff0807973c5242
+  languageName: node
+  linkType: hard
+
+"@account-abstraction/utils@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "@account-abstraction/utils@npm:0.4.0"
+  dependencies:
+    "@account-abstraction/contracts": ^0.4.0
+    "@ethersproject/abi": ^5.7.0
+    "@ethersproject/providers": ^5.7.0
+    "@openzeppelin/contracts": ^4.7.3
+    ethers: ^5.7.0
+  checksum: 6c1ffea8886139ed84ef126d4e280ab29944455f700f67501d2959f7fbc25e9f36ec9bd1c0e0faf20da394cbe594427af83fcc29ee10f164ac537515b58f742d
   languageName: node
   linkType: hard
 
@@ -4686,6 +4724,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aasnap-monorepo@workspace:."
   dependencies:
+    "@account-abstraction/contracts": ^0.4.0
+    "@account-abstraction/sdk": ^0.4.0
     "@metamask/eslint-config": ^10.0.0
     "@metamask/eslint-config-jest": ^10.0.0
     "@metamask/eslint-config-nodejs": ^10.0.0

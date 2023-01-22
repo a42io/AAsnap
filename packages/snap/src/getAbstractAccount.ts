@@ -1,8 +1,8 @@
 import { ethers } from 'ethers';
 import { SimpleAccountAPI } from '@account-abstraction/sdk';
 
-const entryPointAddress = '0x1D9a2CB3638C2FC8bF9C01D088B79E75CD188b17';
-const factoryAddress = '0xe19E9755942BB0bD0cCCCe25B1742596b8A8250b';
+const entryPointAddress = '0x0F46c65C17AA6b4102046935F33301f0510B163A';
+const factoryAddress = '0x6C583EE7f3a80cB53dDc4789B0Af1aaFf90e55F3';
 
 export const getAbstractAccount = async (): Promise<SimpleAccountAPI> => {
   const provider = new ethers.providers.Web3Provider(wallet as any);

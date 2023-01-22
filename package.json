@@ -1,6 +1,6 @@
 {
   "name": "aasnap-monorepo",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "private": true,
   "description": "",
   "homepage": "https://github.com/MetaMask/template-snap-monorepo#readme",
@@ -51,6 +51,8 @@
     "node": ">=16.0.0"
   },
   "dependencies": {
+    "@account-abstraction/contracts": "^0.4.0",
+    "@account-abstraction/sdk": "^0.4.0",
     "buffer": "^6.0.3"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@a42/aasnap",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "MetaMask Snap for Account Abstraction",
   "repository": {
     "type": "git",
@@ -57,8 +57,8 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@account-abstraction/contracts": "^0.3.0",
-    "@account-abstraction/sdk": "^0.3.0",
+    "@account-abstraction/contracts": "^0.4.0",
+    "@account-abstraction/sdk": "^0.4.0",
     "ethers": "^5.7.2"
   }
 }
