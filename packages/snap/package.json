@@ -23,7 +23,8 @@
     "lint:fix": "yarn lint:eslint --fix && yarn lint:misc --write",
     "lint:misc": "prettier '**/*.json' '**/*.md' '!CHANGELOG.md' --ignore-path .gitignore",
     "serve": "mm-snap serve",
-    "start": "mm-snap watch"
+    "start": "mm-snap watch",
+    "postinstall": "patch-package"
   },
   "devDependencies": {
     "@lavamoat/allow-scripts": "^2.0.3",
@@ -43,6 +44,7 @@
     "eslint-plugin-jsdoc": "^39.2.9",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "patch-package": "^6.5.1",
     "prettier": "^2.2.1",
     "prettier-plugin-packagejson": "^2.2.11",
     "rimraf": "^3.0.2",
@@ -57,8 +59,9 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@account-abstraction/contracts": "^0.3.0",
-    "@account-abstraction/sdk": "^0.3.0",
+    "@account-abstraction/contracts": "^0.4.0",
+    "@account-abstraction/sdk": "^0.4.0",
+    "buffer": "^6.0.3",
     "ethers": "^5.7.2"
   }
 }
